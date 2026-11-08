@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DDMentor — classroom copy</title>
+  <!-- Split sources: ddmentor.css, ddmentor-intro.js, ddmentor-invent.js, ddmentor-den.js.
+       Add new content to those files. Do not grow this back into one mega HTML file. -->
+  <link rel="stylesheet" href="ddmentor.css?v=8" />
+</head>
+<body>
+  <div id="stage-one">
+<div class="wrap">
+    <div id="stage-briefing">
+    <header class="hero">
+      <h1>DDMentor</h1>
+      <p class="tiny">Classroom copy — tap Start again under the five steps to clear this computer.</p>
+      <img class="journey-hero-img" src="young-entrepreneurs-journey.png" alt="Invent a product, get feedback, plan costs and profit in pounds, then sell it." width="1600" height="900" />
+      <p class="lead home-lead">A game for young entrepreneurs, create a product and take it to the Dragons and win investment.</p>
+      <div class="name-row">
+        <input id="player-name" type="text" maxlength="24" placeholder="Write your first name, or speak it" aria-label="Your first name" />
+        <button class="btn" id="enter-btn" type="button">I am the entrepreneur</button>
+      </div>
+      <div class="speak-row">
+        <button class="btn speak-btn" id="speak-name" type="button">Speak my name</button>
+        <span class="speak-status" id="speak-name-status"></span>
+      </div>
+      <p class="tiny" id="speech-browser-note">You can always write in the boxes. Speak my answers works in Chrome or Edge if the microphone is allowed.</p>
+      <p id="welcome-line"></p>
+    </header>
+
+    <section class="panel">
+      <h2>What is the Dragon's Den game?</h2>
+      <p>
+        Dragon's Den is a TV show where people with a business idea — called
+        <button type="button" class="word-def" data-word="entrepreneur">entrepreneurs</button>
+        — try to convince wealthy investors to invest money in the entrepreneur's
+        business. An entrepreneur has a few minutes to explain what they sell,
+        who it is for, and how much money they need. This explanation is called the
+        <button type="button" class="word-def" data-word="pitch">pitch</button>.
+      </p>
+      <p>
+        Investors do not give gifts. If they like the idea, they may
+        <strong>invest</strong> — put money into the business — but they want a
+        share of the business in return. This is called
+        <button type="button" class="word-def" data-word="equity">equity</button>.
+        Your job in the game as an entrepreneur is to invent the product and write
+        the pitch. You will meet the investors — the dragons — when your product
+        pitch is ready.
+      </p>
+      <p class="intro-def" id="intro-def" aria-live="polite"></p>
+    </section>
+
+    <section class="panel example-only" id="example-banner-home">
+      <p class="example-banner" style="margin:0">You are looking at Sam’s finished <strong>BootDry Pegs</strong> game. Tap the steps to browse. You cannot change anything here. Tap <strong>Return</strong> when you want to play your own game.</p>
+    </section>
+
+    <section class="panel" id="ready">
+      <h2>How you get ready</h2>
+      <p class="nav-row" style="justify-content:center;margin:14px 0">
+        <button class="btn btn-gold" id="example-run-btn" type="button">Run example of the game — BootDry Pegs</button>
+      </p>
+      <p>
+        <strong>Play your own game</strong>
+        Create a unique product from your imagination or use the game’s idea generator.
+        Work through the steps to build the features and benefits of your product,
+        to decide who your customers are and how you will reach them, and get the costing and prices right.
+        Then test your pitch in the Dragons’ Den when you answer questions to get investment.
+      </p>
+      <p class="stat" id="step-gate-msg"></p>
+      <div class="steps" id="steps">
+        <button class="step locked" type="button" data-step="0"><span class="num">1</span><br>Invent</button>
+        <button class="step locked" type="button" data-step="1"><span class="num">2</span><br>Customers</button>
+        <button class="step locked" type="button" data-step="2"><span class="num">3</span><br>The money</button>
+        <button class="step locked" type="button" data-step="3"><span class="num">4</span><br>Your pitch</button>
+        <button class="step locked" type="button" data-step="4"><span class="num">5</span><br>Then the Den</button>
+      </div>
+      <p class="tiny" id="steps-help"></p>
+      <p class="nav-row" style="justify-content:center;margin:14px 0 0">
+        <button class="btn start-again-btn" type="button">Start again</button>
+      </p>
+      <p class="tiny">On a shared computer, tap <strong>Start again</strong> so the next person does not see the last game.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Den dictionary — tap a word</h2>
+      <p id="mentor-line"><strong>I'm your business mentor.</strong> The gold words above and these golden buttons are definitions. Tap one and I will read the meaning in the box.</p>
+      <div class="terms">
+        <button class="term" type="button" data-term="percentage">Percentage</button>
+        <button class="term" type="button" data-term="investment">Investment</button>
+        <button class="term" type="button" data-term="valuation">Valuation</button>
+        <button class="term" type="button" data-term="marketing">Marketing</button>
+        <button class="term" type="button" data-term="royalty">Royalty</button>
+      </div>
+      <div class="term-box mentor-def-box" id="term-box">
+        <div class="mentor-fig">
+          <img class="mentor-pic" src="business-mentor.png?v=3" alt="Your business mentor" width="130" height="173" />
+          <button class="btn btn-gold mentor-speak" id="mentor-speak" type="button" data-speak-from="term-box-copy" data-fallback-from="mentor-line">Mentor</button>
+        </div>
+        <div class="term-box-copy" id="term-box-copy">Choose a golden word to see what it means in the Den.</div>
+      </div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <h2>Answer these questions to unlock the first level of the game</h2>
+      <p class="progress" id="quiz-progress">Question 1 of 4</p>
+      <div class="quiz-q" id="quiz-q"></div>
+      <div class="choices" id="quiz-choices"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <p style="margin-top:14px">
+        <button class="btn btn-gold hidden" id="quiz-next" type="button">Next question</button>
+      </p>
+    </section>
+
+    <div class="next-wrap">
+      <p id="unlock-msg">Score at least 3 out of 4 on the quiz to start your own game. Your boxes will be empty — no BootDry Pegs sample.</p>
+      <button class="btn" id="next-stage" type="button" disabled>First step: invent the product</button>
+    </div>
+
+    <p class="disclaimer">
+      An original classroom game inspired by the idea of investor pitch shows.
+      Not affiliated with any television programme.
+    </p>
+    </div>
+    <div id="stage-invent" class="hidden">
+    <p class="example-banner example-only" id="example-banner-invent">Example — Sam’s finished BootDry Pegs pages. Look around. You cannot change the boxes.</p>
+    <p class="nav-row" style="justify-content:flex-start;margin:0 0 8px">
+      <a class="btn" href="#ready" id="back-link">Return</a>
+      <button class="btn start-again-btn" type="button">Start again</button>
+    </p>
+    <header class="hero">
+      <span class="badge" id="step-badge">Step 1 of 5 · Entrepreneur only</span>
+      <h1 id="page-title">Invent the product</h1>
+      <p class="lead step-lead hidden" id="step-lead"></p>
+      <p id="player-line"></p>
+    </header>
+
+    <section class="panel" id="dict-invent">
+      <h2>Den dictionary — tap a word</h2>
+      <p>Tap a golden word if you are unsure. The meaning will appear in the box, and I will read it out.</p>
+      <div class="terms">
+        <button class="term" type="button" data-term="costs">Costs</button>
+        <button class="term" type="button" data-term="product">Product</button>
+        <button class="term" type="button" data-term="customer">Customer</button>
+        <button class="term" type="button" data-term="features">Features of product</button>
+        <button class="term" type="button" data-term="benefits">Benefits of product</button>
+      </div>
+      <div class="term-box mentor-def-box" id="term-box-invent">
+        <div class="mentor-fig">
+          <img class="mentor-pic" src="business-mentor.png?v=3" alt="Your business mentor" width="130" height="173" />
+          <button class="btn btn-gold mentor-speak" type="button" data-speak-from="term-box-invent-copy" data-fallback="Tap a golden word if you are unsure. The meaning will appear in this box, and I will read it out.">Mentor</button>
+        </div>
+        <div class="term-box-copy" id="term-box-invent-copy">Choose a golden word to see what it means in the Den.</div>
+      </div>
+    </section>
+
+    <section class="panel" id="path-panel">
+      <h2>How will you develop a product idea?</h2>
+      <div class="term-box mentor-def-box">
+        <div class="mentor-fig">
+          <img class="mentor-pic" src="business-mentor.png?v=3" alt="Your business mentor" width="130" height="173" />
+          <button class="btn btn-gold mentor-speak" type="button" data-speak-from="path-mentor-copy" data-speak-delay="2000">Mentor</button>
+        </div>
+        <div class="term-box-copy" id="path-mentor-copy">Choose Unique ville to create your own unique product from scratch, or choose Helps Town with many ready-made products to choose from and develop one of those ideas.</div>
+      </div>
+      <div class="route-sign-wrap">
+        <img class="route-sign-img" src="route-sign.png?v=3" alt="A road sign: Uniqueville to the left, Helps Town to the right." width="1024" height="576" />
+        <button class="route-hotspot route-hotspot-left" id="sign-unique" type="button" aria-label="Uniqueville: create your unique product">Uniqueville</button>
+        <button class="route-hotspot route-hotspot-right" id="sign-ready" type="button" aria-label="Helps Town: choose a product category">Helps Town</button>
+      </div>
+      <div class="path-row">
+        <button class="path-btn" type="button" id="path-unique" data-path="unique">
+          <strong>Choose this route to create your unique product.</strong>
+        </button>
+        <button class="path-btn" type="button" id="path-ready" data-path="ready">
+          <strong>Choose this route to see a variety of different product categories, each of which can give you three specific product ideas.</strong>
+        </button>
+      </div>
+    </section>
+
+    <section class="panel hidden" id="choose-panel">
+      <h2 id="choose-heading">Choose a product area</h2>
+      <div class="term-box mentor-def-box">
+        <div class="mentor-fig">
+          <img class="mentor-pic" src="business-mentor.png?v=4" alt="Your business mentor" width="130" height="173" />
+          <button class="btn btn-gold mentor-speak" type="button" data-speak-from="choose-mentor-copy">Mentor</button>
+        </div>
+        <div class="term-box-copy" id="choose-mentor-copy">Tap one product area. Then look at the picture of three ready-made ideas and pick one to develop. You can still change the name and details.</div>
+      </div>
+      <p class="hint" id="pick-hint"></p>
+      <p>
+        <button class="btn btn-gold" id="back-path" type="button">Change how I invent</button>
+      </p>
+      <div class="cats" id="cats"></div>
+    </section>
+
+    <section class="panel hidden" id="cat-scene-panel">
+      <h2 id="cat-scene-title">Look at these ideas</h2>
+      <p class="hint" id="cat-scene-hint">Look at the three ideas in this picture while you decide what to invent or which product to develop.</p>
+      <img class="scene-img" id="cat-scene-img" src="food-drink-products-scene.png" alt="" />
+      <p class="scene-caption" id="cat-scene-caption"></p>
+      <div class="scene-details" id="cat-scene-details"></div>
+    </section>
+
+    <section class="panel hidden" id="ready-panel">
+      <h2>Pick one ready-made product</h2>
+      <p class="hint" id="ready-hint">Choose one idea to develop. You can still tweak the name and details.</p>
+      <div class="ready-grid" id="ready-grid"></div>
+      <p style="margin-top:14px">
+        <button class="btn btn-gold" id="back-cats-ready" type="button">Change category</button>
+      </p>
+    </section>
+
+    <section class="panel hidden" id="invent-panel">
+      <h2 id="invent-heading">Invent your unique product</h2>
+      <div class="invent-layout">
+        <aside class="chosen">
+          <div class="visual" id="chosen-visual" aria-hidden="true"></div>
+          <h3 id="chosen-name"></h3>
+          <button class="btn btn-gold play-only" id="change-cat" type="button">Change category</button>
+        </aside>
+        <div>
+          <div class="term-box mentor-def-box hidden" id="unique-mentor-box">
+            <div class="mentor-fig">
+              <img class="mentor-pic" src="business-mentor.png?v=3" alt="Your business mentor" width="130" height="173" />
+              <button class="btn btn-gold mentor-speak" type="button" data-speak-from="unique-mentor-copy">Mentor</button>
+            </div>
+            <div class="term-box-copy" id="unique-mentor-copy">You decided to create a product that is totally unique. Remember this is a game — you can use your imagination to create something without worrying about how it actually works. But you do have to consider what it does, what problem it solves for potential customers, and who those customers are. Because it is unique you can name it and even upload a picture or drawing. To complete this section you can write in the boxes or speak your answers.</div>
+          </div>
+          <p class="hint" id="spark"></p>
+          <div class="speak-row play-only">
+            <button class="btn speak-btn" id="speak-invent-section" type="button" data-speak-label="Speak my answers">Speak my answers</button>
+            <span class="speak-status" id="speak-invent-status"></span>
+          </div>
+          <label for="product-name">Product name</label>
+          <input id="product-name" type="text" maxlength="60" placeholder="Write it here, or speak it" />
+          <label for="product-does">What does it do? (one or two sentences)</label>
+          <textarea id="product-does" maxlength="280" placeholder="Write it here, or speak it"></textarea>
+          <label for="product-who">Who is it for?</label>
+          <textarea id="product-who" placeholder="Write a real group of people, or speak it"></textarea>
+          <div id="unique-photo-block" class="photo-upload hidden play-only">
+            <label for="product-photo">Add a picture of your idea (optional)</label>
+            <p class="tiny">Take a photo of a drawing, a model, or something that looks like your invention.</p>
+            <input id="product-photo" type="file" accept="image/*" />
+            <button class="btn btn-gold" id="clear-photo" type="button">Remove picture</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="next-wrap hidden play-only" id="save-wrap">
+      <div class="nav-row">
+        <button class="btn btn-gold" id="save-btn" type="button" disabled>Save this invention</button>
+        <button class="btn" id="next-btn" type="button" disabled>Continue with customers, money and pitch</button>
+      </div>
+      <p id="save-msg"></p>
+    </div>
+
+    <div id="journey" class="hidden">
+      <section class="panel hidden" id="progress-panel">
+        <h2>Progress so far</h2>
+        <p class="tiny" id="journey-steps-help">These are the same five steps as on the first page. In your own game, later steps stay locked until you finish the one before.</p>
+        <p class="stat" id="journey-gate-msg"></p>
+        <div class="steps" id="journey-steps">
+          <button class="step locked" type="button" data-step="0"><span class="num">1</span><br>Invent</button>
+          <button class="step locked" type="button" data-step="1"><span class="num">2</span><br>Customers</button>
+          <button class="step locked" type="button" data-step="2"><span class="num">3</span><br>The money</button>
+          <button class="step locked" type="button" data-step="3"><span class="num">4</span><br>Your pitch</button>
+          <button class="step locked" type="button" data-step="4"><span class="num">5</span><br>Then the Den</button>
+        </div>
+      </section>
+
+      <section class="panel" id="dict-journey">
+        <h2>Den dictionary — tap a word</h2>
+        <p>Tap a golden word if you get stuck on customers, money or the pitch.</p>
+        <div class="terms">
+          <button class="term" type="button" data-term="customer">Customer</button>
+          <button class="term" type="button" data-term="cost">Cost to make</button>
+          <button class="term" type="button" data-term="marketing">Marketing</button>
+          <button class="term" type="button" data-term="profit">Profit</button>
+          <button class="term" type="button" data-term="sales">Projected sales</button>
+          <button class="term" type="button" data-term="valuation">Valuation</button>
+          <button class="term" type="button" data-term="percentage">Percentage</button>
+        </div>
+        <div class="term-box" id="term-box-journey">Choose a golden word to see what it means in the Den.</div>
+      </section>
+
+      <section class="panel" id="customers-panel">
+        <h2>Develop your target customers</h2>
+        <div class="invent-layout">
+          <aside class="chosen">
+            <div class="visual" id="journey-visual" aria-hidden="true"></div>
+            <h3 id="journey-name"></h3>
+            <p id="journey-blurb" style="font-size:0.9rem"></p>
+          </aside>
+          <div>
+            <div class="term-box mentor-def-box">
+              <div class="mentor-fig">
+                <img class="mentor-pic" src="business-mentor.png?v=4" alt="Your business mentor" width="130" height="173" />
+                <button class="btn btn-gold mentor-speak" type="button" data-speak-from="customers-mentor-copy">Mentor</button>
+              </div>
+              <div class="term-box-copy" id="customers-mentor-copy">Name a real group of people who you think are likely to buy your product, they are your future customers. Try to find out what problem your product solves for these customers, where will this specific group of people be able to find your product easily, which retail markets do they visit and how they will hear about the product.</div>
+            </div>
+            <p class="hint play-only" id="cust-hint">Investors always ask: who will actually buy this? “Everyone” is too vague. You can <strong>write</strong> in the boxes, or tap <strong>Speak my answers</strong> once and say each part out loud (Chrome or Edge).</p>
+            <div class="speak-row play-only">
+              <button class="btn speak-btn" id="speak-customers-section" type="button" data-speak-label="Speak my answers">Speak my answers</button>
+              <span class="speak-status" id="speak-customers-status"></span>
+            </div>
+            <label for="cust-who">Who is the customer?</label>
+            <input id="cust-who" type="text" maxlength="100" placeholder="Write it here, or speak it" />
+            <label for="cust-need">What problem does it solve for them?</label>
+            <textarea id="cust-need" maxlength="280" placeholder="Write it here, or speak it"></textarea>
+            <label for="cust-where">Where will they buy it?</label>
+            <input id="cust-where" type="text" maxlength="100" placeholder="Write it here, or speak it" />
+            <label for="cust-hear">How will they hear about it?</label>
+            <input id="cust-hear" type="text" maxlength="120" placeholder="Write it here, or speak it" />
+          </div>
+        </div>
+        <div class="next-wrap play-only" id="cust-wrap">
+          <button class="btn btn-gold" id="save-customers" type="button" disabled>I've finished customers</button>
+          <p id="cust-save-msg"></p>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="money-panel">
+        <h2>Costs, sales and profits</h2>
+        <div class="term-box mentor-def-box">
+          <div class="mentor-fig">
+            <img class="mentor-pic" src="business-mentor.png?v=4" alt="Your business mentor" width="130" height="173" />
+            <button class="btn btn-gold mentor-speak" type="button" data-speak-from="money-mentor-copy">Mentor</button>
+          </div>
+          <div class="term-box-copy" id="money-mentor-copy">Complete the following sections, to help you and the Dragons understand your costs and likely sales and profit. Then choose how much investment you want and what share of the business you will offer.</div>
+        </div>
+        <p class="hint play-only" id="money-intro-hint">Before you fill these boxes, write every number in words, not figures. For example write <strong>forty thousand pounds</strong>, not 40000, and <strong>fifteen percent</strong>, not 15. You can write the words or speak them.</p>
+        <p class="stat hidden" id="money-words-warn">Write the number in words, not figures — for example forty thousand pounds.</p>
+        <div class="speak-row play-only">
+          <button class="btn speak-btn" id="speak-money-section" type="button" data-speak-label="Speak my answers">Speak my answers</button>
+          <span class="speak-status" id="speak-money-status"></span>
+        </div>
+        <p class="legend">
+          <span><i class="swatch" style="background:#c2410c"></i> Cost to make</span>
+          <span><i class="swatch" style="background:#7c3aed"></i> Marketing</span>
+          <span><i class="swatch" style="background:#047857"></i> Projected sales</span>
+        </p>
+
+        <div class="money-block block-make">
+          <h3>Cost to make</h3>
+          <label for="unit-cost">Cost to make one</label>
+          <input id="unit-cost" class="money-words" data-money-kind="money" type="text" autocomplete="off" inputmode="text" placeholder="two pounds fifty" />
+          <p class="sub-label">How many items do you plan to make in a month?</p>
+          <p class="hint" id="sales-fit-hint">Three realistic monthly figures will appear for your product.</p>
+          <div class="choice-row" id="sales-choices"></div>
+          <label for="sales-own" id="sales-own-label" class="hidden">My monthly make figure (in words)</label>
+          <input id="sales-own" class="hidden money-words" data-money-kind="count" type="text" autocomplete="off" inputmode="text" placeholder="seventy five" />
+          <div class="stat" id="make-cost-stat">Pick how many you will make to see the monthly and yearly make-cost.</div>
+        </div>
+
+        <div class="money-block block-market">
+          <h3>Marketing</h3>
+          <p class="sub-label">Expected cost of selling — advertising and marketing (each month)</p>
+          <p class="hint">Tap one, two, or all three. You can also add your own figure in words. The costs add up.</p>
+          <div class="choice-row" id="market-choices">
+            <button type="button" data-market="80" data-label="Posters and leaflets">Posters and leaflets · eighty pounds</button>
+            <button type="button" data-market="250" data-label="Social media ads">Social media ads · two hundred and fifty pounds</button>
+            <button type="button" data-market="750" data-label="Stalls, samples and ads">Stalls, samples and ads · seven hundred and fifty pounds</button>
+            <button type="button" data-market="own">Choose my own figure</button>
+          </div>
+          <label for="market-own" id="market-own-label" class="hidden">My monthly marketing cost (in words)</label>
+          <input id="market-own" class="hidden money-words" data-money-kind="money" type="text" autocomplete="off" inputmode="text" placeholder="one hundred and twenty pounds" />
+          <div class="stat" id="sell-cost-stat">Pick a marketing option to see the monthly and yearly cost of selling.</div>
+        </div>
+
+        <div class="money-block block-sales">
+          <h3>Projected sales</h3>
+          <label for="sell-price">Selling price for one</label>
+          <input id="sell-price" class="money-words" data-money-kind="money" type="text" autocomplete="off" inputmode="text" placeholder="eight pounds" />
+          <p class="sub-label">How many do you expect to sell in a month?</p>
+          <p class="hint" id="proj-fit-hint">Choose a cautious, likely or busy month — or write your own estimate in words.</p>
+          <div class="choice-row" id="proj-choices"></div>
+          <label for="proj-own" id="proj-own-label" class="hidden">My monthly sales estimate (in words)</label>
+          <input id="proj-own" class="hidden money-words" data-money-kind="count" type="text" autocomplete="off" inputmode="text" placeholder="eighty" />
+          <div class="stat" id="proj-sales-stat">Pick an expected monthly sales figure to see monthly and yearly sales money.</div>
+          <div class="outcome hidden" id="sales-compare"></div>
+        </div>
+
+        <div class="ask-block">
+          <p class="sub-label">Now decide how much to ask for</p>
+          <p>A strong ask usually covers making the products <em>and</em> marketing — often for more than one month, so you are not broke after week one. Write the amounts in words.</p>
+          <div class="money-grid">
+            <div>
+              <label for="ask-amount">How much investment do you want?</label>
+              <input id="ask-amount" class="money-words" data-money-kind="money" type="text" autocomplete="off" inputmode="text" placeholder="five thousand pounds" />
+            </div>
+            <div>
+              <label for="equity-pct">Equity you will give away <span class="field-note">a share of the company, in words</span></label>
+              <input id="equity-pct" class="money-words" data-money-kind="percent" type="text" autocomplete="off" inputmode="text" placeholder="fifteen percent" />
+            </div>
+          </div>
+        </div>
+        <div class="stat" id="money-stats">Complete the orange, purple and green sections, then choose your ask.</div>
+        <div class="next-wrap play-only" id="money-done-wrap">
+          <button class="btn btn-gold" id="save-money" type="button" disabled>I've finished the money</button>
+          <p id="money-save-msg"></p>
+        </div>
+      </section>
+
+      <section class="panel hidden play-only" id="money-quiz-panel">
+        <h2>Check the costs and marketing</h2>
+        <div class="term-box mentor-def-box">
+          <div class="mentor-fig">
+            <img class="mentor-pic" src="business-mentor.png?v=4" alt="Your business mentor" width="130" height="173" />
+            <button class="btn btn-gold mentor-speak" type="button" data-speak-from="quiz-mentor-copy">Mentor</button>
+          </div>
+          <div class="term-box-copy" id="quiz-mentor-copy">Answer the following questions to move on to the next step.</div>
+        </div>
+        <p class="hint play-only" id="quiz-intro-hint">Answer the following questions to move on to the next step.</p>
+        <div id="quiz-start-wrap">
+          <p id="quiz-gate-msg">Finish make-cost, monthly sales, and marketing first. Then the questions unlock.</p>
+          <p>
+            <button class="btn" id="start-money-quiz" type="button" disabled>I'm ready — give me a fresh set of questions</button>
+          </p>
+        </div>
+        <div id="money-quiz-body" class="hidden">
+          <p class="quiz-prog" id="mq-progress">Question 1 of 4</p>
+          <div class="quiz-q" id="mq-q"></div>
+          <div class="quiz-choices" id="mq-choices"></div>
+          <div class="quiz-feedback" id="mq-feedback"></div>
+          <p style="margin-top:14px">
+            <button class="btn btn-gold hidden" id="mq-next" type="button">Next question</button>
+          </p>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="pitch-panel">
+        <h2>Your pitch — six stages</h2>
+        <div class="term-box mentor-def-box">
+          <div class="mentor-fig">
+            <img class="mentor-pic" src="business-mentor.png?v=4" alt="Your business mentor" width="130" height="173" />
+            <button class="btn btn-gold mentor-speak" type="button" data-speak-from="pitch-mentor-copy">Mentor</button>
+          </div>
+          <div class="term-box-copy" id="pitch-mentor-copy">A pitch is a short presentation which is used to explain who you are and what your product is. The following steps will help you to build the pitch you will make to the Dragons. The finished pitch will also include the information from the pages on money, customers and marketing. The mentor will then read your pitch back to you to enable you to make amendments before presenting to the Dragons.</div>
+        </div>
+        <p class="hint" id="pitch-intro-hint">A pitch is a short speech in a set order. Write each stage in your own words from the product you invented — or tap <strong>Speak my answers</strong> once and say each stage out loud (Chrome or Edge). There is no sample product on this page.</p>
+        <div class="speak-row play-only">
+          <button class="btn speak-btn" id="speak-pitch-section" type="button" data-speak-label="Speak my answers">Speak my answers</button>
+          <span class="speak-status" id="speak-pitch-status"></span>
+        </div>
+        <details class="full-example">
+          <summary>Hear the full example pitch (BootDry Pegs)</summary>
+          <p id="full-example-text"></p>
+        </details>
+        <div class="stage-nav" id="stage-nav" aria-label="Pitch stages"></div>
+        <div id="pitch-stages"></div>
+        <div class="pitch-actions play-only">
+          <button class="btn" id="fill-from-answers" type="button">Fill empty boxes from my answers</button>
+          <div class="term-box mentor-def-box">
+            <div class="mentor-fig">
+              <img class="mentor-pic" src="business-mentor.png?v=4" alt="Your business mentor" width="96" height="128" />
+              <button class="btn btn-gold mentor-speak" type="button" data-speak-from="stitch-mentor-copy">Mentor</button>
+            </div>
+            <div class="term-box-copy" id="stitch-mentor-copy">Tap Stitch my pitch to create your pitch from the information you have given. The mentor will then read it back to you and you can amend anything you feel is not clear.</div>
+          </div>
+          <button class="btn btn-gold" id="build-pitch" type="button">Stitch my pitch</button>
+        </div>
+        <p class="tiny">Stitch my pitch uses your six stage lines plus the customers, marketing and money boxes, so the Dragons hear the real figures.</p>
+        <label for="pitch-edit">Full speech (you can still edit)</label>
+        <textarea id="pitch-edit" maxlength="4000" placeholder="Stitch the six stages with customers, marketing and money, then practise saying this out loud."></textarea>
+        <div class="speak-row play-only">
+          <button class="btn speak-btn" id="speak-full" type="button" data-target="pitch-edit" data-speak-label="Speak the full pitch">Speak the full pitch</button>
+          <span class="speak-status" id="speak-full-status"></span>
+        </div>
+        <p class="stat" id="pitch-status">Your pitch is not saved yet.</p>
+      </section>
+
+      <div class="next-wrap hidden" id="pitch-wrap">
+        <div class="nav-row">
+          <button class="btn btn-gold play-only" id="save-pitch" type="button">Save my full pitch</button>
+          <button class="btn" id="den-btn" type="button" disabled>Enter the Den (next)</button>
+        </div>
+        <p id="pitch-save-msg"></p>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  <div id="stage-two" class="hidden">
+<div class="wrap">
+    <p class="example-banner example-only" id="example-banner-den">Example — Sam’s finished Den. Read the pitch, the answers, and the decision. You cannot play this round.</p>
+    <p class="nav-row" style="justify-content:flex-start;margin:0 0 8px">
+      <a class="btn" href="#ready" id="back-to-stage-one">Return</a>
+      <button class="btn start-again-btn" type="button">Start again</button>
+    </p>
+    <div class="panel example-only" id="den-progress-panel" style="padding:12px 16px">
+      <p class="tiny" style="margin:0 0 8px">Browse Sam’s finished pages:</p>
+      <div class="steps" id="den-steps">
+        <button class="step" type="button" data-step="0"><span class="num">1</span><br>Invent</button>
+        <button class="step" type="button" data-step="1"><span class="num">2</span><br>Customers</button>
+        <button class="step" type="button" data-step="2"><span class="num">3</span><br>The money</button>
+        <button class="step" type="button" data-step="3"><span class="num">4</span><br>Your pitch</button>
+        <button class="step" type="button" data-step="4"><span class="num">5</span><br>Then the Den</button>
+      </div>
+    </div>
+    <header class="hero">
+      <span class="badge" id="round-badge">Stage 2 · Round 1</span>
+      <h1 id="round-title">The Dragons will now ask</h1>
+      <p class="lead step-lead" id="step-lead-den">
+        Only after that pitch is ready do you walk into the Den. That is when the investors appear. You stay the entrepreneur. They decide whether to offer a deal.
+      </p>
+      <p class="lead" id="round-lead">
+        Five investors. Five skills. They have heard your pitch. Stay the entrepreneur —
+        answer clearly, then wait for the next chair.
+      </p>
+      <p id="den-player-line"></p>
+    </header>
+
+    <div id="game">
+      <section class="panel" id="heard-panel">
+        <h2>Your pitch, as they heard it</h2>
+        <p class="hint hidden" id="practice-note">This is Sam’s completed BootDry Pegs pitch.</p>
+        <p id="product-line" class="stat"></p>
+        <div class="pitch-preview" id="pitch-preview"></div>
+        <p class="stat" id="match-line"></p>
+      </section>
+
+      <section class="panel hidden example-only" id="example-den-qa">
+        <h2>The Dragons’ questions — Sam’s answers</h2>
+        <p class="hint">Sam has already answered. Scroll to read both rounds, then see the decision at the bottom.</p>
+        <div id="example-qa-list"></div>
+      </section>
+
+      <section class="panel hidden example-only" id="example-deal-board">
+        <h2>The Dragons decide</h2>
+        <p class="hint" id="example-deal-lead"></p>
+        <div class="deal-board" id="example-deal-rows"></div>
+      </section>
+
+      <section class="panel" id="meet-panel">
+        <h2>Meet the five Dragons</h2>
+        <p class="hint">Tap a portrait to hear that Dragon. They will use your name. Only Ledger checks whether the pitch matches the money, customer, and marketing boxes. The others stick to their own specialism.</p>
+        <div class="dragon-grid" id="dragon-grid"></div>
+        <div class="nav-row">
+          <button class="btn" id="start-q" type="button">I am ready for questions</button>
+          <button class="btn btn-quiet" id="stop-all" type="button">Stop speaking</button>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="ask-panel">
+        <div class="progress-pips" id="pips"></div>
+        <div class="ask-layout">
+          <figure class="ask-portrait">
+            <img id="ask-img" alt="" />
+            <figcaption id="ask-name"></figcaption>
+          </figure>
+          <div>
+            <div class="question-bubble" id="ask-bubble"></div>
+            <div class="actions">
+              <button class="btn btn-gold" id="hear-q" type="button">Hear the question</button>
+              <button class="btn btn-quiet" id="speak-ans" type="button">Speak my answer</button>
+              <button class="btn btn-quiet" id="stop-q" type="button">Stop speaking</button>
+            </div>
+            <label for="answer-box"><strong>Your answer</strong></label>
+            <p class="hint">You can <strong>write</strong> your answer in the box, or tap <strong>Speak my answer</strong>.</p>
+            <textarea id="answer-box" maxlength="800" placeholder="Write your answer here, or speak it"></textarea>
+            <p class="stat" id="listen-status"></p>
+            <div class="actions">
+              <button class="btn" id="submit-ans" type="button">Give this answer</button>
+            </div>
+            <div class="reaction hidden" id="reaction"></div>
+            <div class="actions">
+              <button class="btn btn-gold hidden" id="next-dragon" type="button">Next Dragon</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="round-panel">
+        <h2>Round 2 — The marketplace</h2>
+        <p class="hint">The Dragons now ask how the business actually runs: getting it made, moved, and supplied. Expect questions on logistics, suppliers, and the cost of goods. A thin first answer still means you study the advice and answer once more. After that second try they move on, even if the new answer is still thin.</p>
+        <div class="nav-row">
+          <button class="btn" id="start-round2" type="button">Start marketplace questions</button>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="deal-panel">
+        <h2>The Dragons decide</h2>
+        <p class="hint" id="deal-lead"></p>
+        <div id="deal-live">
+          <div class="ask-layout">
+            <figure class="ask-portrait">
+              <img id="deal-img" alt="" />
+              <figcaption id="deal-name"></figcaption>
+            </figure>
+            <div>
+              <div id="deal-verdict" class="deal-out"></div>
+              <div class="nav-row">
+                <button class="btn btn-gold" id="deal-next" type="button">Next Dragon</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="deal-board" class="deal-board hidden"></div>
+        <div id="deal-choose" class="hidden"></div>
+      </section>
+
+      <section class="panel hidden" id="outcome-panel">
+        <h2 id="outcome-title">The result</h2>
+        <p class="hint" id="outcome-lead"></p>
+        <figure class="outcome-hero" id="outcome-hero">
+          <img id="outcome-img" alt="" />
+          <figcaption id="outcome-caption"></figcaption>
+        </figure>
+        <p id="outcome-body"></p>
+        <p class="hint play-only" id="outcome-end-hint">Finished? Save a copy of this result if you want to keep it. Then tap <strong>Start again</strong> so the next person starts with a clean game.</p>
+        <p class="hint example-only" id="outcome-example-hint">This is the picture of Sam’s decision. Tap a step above, or <strong>Return</strong>, when you have finished looking.</p>
+        <div class="nav-row play-only">
+          <button class="btn btn-gold" id="save-game-btn" type="button">Save this result</button>
+          <button class="btn start-again-btn" id="clear-game-btn" type="button">Start again</button>
+        </div>
+        <p class="stat" id="end-game-status"></p>
+      </section>
+
+      <section class="panel hidden" id="done-panel">
+        <h2>Questions complete</h2>
+        <p id="done-lead"></p>
+        <div id="recap"></div>
+        <div class="nav-row">
+          <button class="btn btn-quiet" id="replay" type="button">Hear the Dragons again</button>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="coach-panel">
+        <h2>Study this answer</h2>
+        <p class="hint" id="coach-progress"></p>
+        <div class="ask-layout">
+          <figure class="ask-portrait">
+            <img id="coach-img" alt="" />
+            <figcaption id="coach-name"></figcaption>
+          </figure>
+          <div>
+            <div class="coach-block">
+              <h3>The Dragon asked</h3>
+              <p id="coach-question"></p>
+            </div>
+            <div class="coach-block weak">
+              <h3>Your answer was too thin</h3>
+              <p id="coach-answer"></p>
+              <p class="stat" id="coach-reaction"></p>
+            </div>
+            <div class="coach-block advice">
+              <h3>This Dragon is speaking to you</h3>
+              <p id="coach-advice"></p>
+            </div>
+            <p class="stat">Listen. Do not type an answer here. When you have heard every weak-answer briefing, you will face the same questions again.</p>
+            <div class="nav-row">
+              <button class="btn btn-quiet" id="hear-advice" type="button">Hear the Dragon again</button>
+              <button class="btn btn-gold" id="coach-next" type="button">Next weak answer</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="revise-panel">
+        <h2>Rewrite your pitch</h2>
+        <p class="hint" id="revise-hint">This is a copy of your six pitch stages — not the invent page. Red boxes show a Dragon’s pushback. Change those lines so the next pitch already answers them. Dragon comments stay on screen only until you resubmit; they are not part of the speech.</p>
+        <div class="stage-nav" id="revise-stage-nav"></div>
+        <div id="revise-stages"></div>
+        <div class="nav-row">
+          <button class="btn btn-gold" id="resubmit-pitch" type="button">Resubmit this pitch</button>
+          <button class="btn btn-quiet" id="cancel-revise" type="button">Back to the recap</button>
+        </div>
+        <p class="stat" id="revise-status"></p>
+      </section>
+    </div>
+
+    <p class="disclaimer">
+      An original classroom game inspired by the idea of investor pitch shows.
+      Not affiliated with any television programme.
+    </p>
+  </div>
+  </div>
+  <script src="ddmentor-intro.js?v=8"></script>
+  <script src="writing-help.js?v=8"></script>
+  <script src="ddmentor-invent.js?v=8"></script>
+  <script src="ddmentor-den.js?v=8"></script>
+</body>
+</html>
